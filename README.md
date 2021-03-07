@@ -1,4 +1,4 @@
-# test-preact
+# poke-preact
 
 ## CLI Commands
 

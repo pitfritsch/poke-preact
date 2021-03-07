@@ -1,6 +1,6 @@
 {
-  "name": "test-preact",
-  "short_name": "test-preact",
+  "name": "poke-preact",
+  "short_name": "poke-preact",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
