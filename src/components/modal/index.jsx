@@ -1,5 +1,7 @@
+import { useCallback, useEffect, useState } from 'preact/hooks'
 import React from 'react'
 import styled, { css, keyframes } from 'styled-components'
+import Service from '../../utils/services'
 
 const StyledModalContainer = styled.div`
   display: none;
@@ -77,12 +79,49 @@ const StyledModal = styled.div`
   }
 `
 
+const rotate = keyframes`
+0% { 
+  transform: rotate(0deg);
+}
+100% { 
+  transform: rotate(360deg);
+}
+`
+
+const Loading = styled.div`
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  border: 5px solid transparent;
+  border-top: 5px solid #FDFDFF;
+  animation: ${rotate} 1s infinite;
+`
+
 function Modal({ data, closeFunction }) {
-  console.log(data)
+
+  const [ blob, setBlob ] = useState(undefined)
+
+  const loadImage = useCallback(async () => {
+    if (!data) return
+    setBlob(await Service.getImageBlob(data.image))
+  }, [data])
+
+  useEffect(() => {
+    loadImage()
+  }, [loadImage])
+
+  const handleClose = useCallback(() => {
+    setBlob(undefined)
+    closeFunction()
+  }, [closeFunction])
+
   return (
-    <StyledModalContainer open={!!data} onClick={() => closeFunction()}>
+    <StyledModalContainer open={!!data} onClick={handleClose}>
       <StyledModal onClick={(e) => e.stopPropagation()}>
-        <img src={data?.image} alt="imagem"/>
+        {blob ?
+          <img src={blob} alt="imagem"/> :
+          <Loading />
+        }
       </StyledModal>
     </StyledModalContainer>
   )

@@ -23,4 +23,13 @@ export default class Service {
     return res
   }
 
+  static async getImageBlob(url) {
+    return fetch(url)
+    .then(resp => resp.blob())
+    .then(myBlob => {
+      var obj = URL.createObjectURL(myBlob)
+      return obj
+    })
+  }
+
 }

@@ -16,8 +16,8 @@ const StyledButton = styled.div`
 
   :hover {
     transform: scale(1.05);
-    background-color: #ff3683;
-    color: white;
+    background-color: #F37748;
+    color: #FDFDFF;
   }
   
   :active {

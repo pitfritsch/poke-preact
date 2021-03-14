@@ -8,7 +8,7 @@ const StyledCard = styled.div`
 	background-color: #fafafa;
 	border-radius: 5px;
 	font-family: 'Cantarell', sans-serif;
-	color: #222;
+	color: #393D3F;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -18,8 +18,8 @@ const StyledCard = styled.div`
 	cursor: pointer;
 	
 	:hover, :focus{
-    background-color: #3b5ca7;
-		color: white;
+    background-color: #067BC2;
+		color: #FDFDFF;
 		transform: scale(1.05);
 	}
 	:active{
