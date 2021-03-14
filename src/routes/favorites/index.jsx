@@ -1,9 +1,9 @@
+import style from './style'
 
-// Note: `user` comes from the URL, courtesy of our router
 const Favorites = () => {
 
 	return (
-		<div>
+		<div class={style.favorites}>
 			<h1>Profile</h1>
 		</div>
 	);

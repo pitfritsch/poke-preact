@@ -30,6 +30,7 @@
     "preact": "^10.3.2",
     "preact-render-to-string": "^5.1.4",
     "preact-router": "^3.2.1",
+    "react-icons": "^4.2.0",
     "styled-components": "^5.2.1"
   },
   "jest": {

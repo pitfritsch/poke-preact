@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from 'preact/hooks'
 import React from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import Service from '../../utils/services'
+import { FaStar } from 'react-icons/fa';
+import Toast from '../toast';
 
 const StyledModalContainer = styled.div`
   display: none;
@@ -42,6 +44,7 @@ const fade = keyframes`
 `
 
 const StyledModal = styled.div`
+  position: relative;
   background: #54b7ff;
   width: 50vw;
   height: 75vh;
@@ -80,12 +83,12 @@ const StyledModal = styled.div`
 `
 
 const rotate = keyframes`
-0% { 
-  transform: rotate(0deg);
-}
-100% { 
-  transform: rotate(360deg);
-}
+  0% { 
+    transform: rotate(0deg);
+  }
+  100% { 
+    transform: rotate(360deg);
+  }
 `
 
 const Loading = styled.div`
@@ -97,9 +100,44 @@ const Loading = styled.div`
   animation: ${rotate} 1s infinite;
 `
 
+const Header = styled.header`
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 15px 15px;
+`
+
+const shakingHover = keyframes`
+  10%, 30%, 50%, 70%, 90% {
+    transform: rotate(-7deg);
+  }
+  20%, 40%, 60%, 80% {
+    transform: rotate(7deg);
+  }
+`
+
+const Star = styled(FaStar)`
+  font-size: 40px;
+  transition: .2s;
+  cursor: pointer;
+  animation: ${shakingHover};
+  animation-duration: 1s;
+  animation-iteration-count: initial;
+  
+  :hover {
+    transform: scale(1.1);
+    color: gold;
+  }
+
+  :active {
+    transform: scale(0.8)
+  }
+`
+
 function Modal({ data, closeFunction }) {
 
   const [ blob, setBlob ] = useState(undefined)
+  const [ toastDescription, setToastDescription ] = useState(undefined)
 
   const loadImage = useCallback(async () => {
     if (!data) return
@@ -112,17 +150,39 @@ function Modal({ data, closeFunction }) {
 
   const handleClose = useCallback(() => {
     setBlob(undefined)
+    setToastDescription(undefined)
     closeFunction()
   }, [closeFunction])
 
+  const handleAddFavorite = useCallback(() => {
+    var favorites =  JSON.parse(localStorage.getItem("favorites") || "[]")
+    favorites.push(data)
+    localStorage.setItem('favorites', JSON.stringify(favorites))
+
+    setToastDescription(`${data.name} added to favorites`)
+  }, [data])
+
   return (
     <StyledModalContainer open={!!data} onClick={handleClose}>
-      <StyledModal onClick={(e) => e.stopPropagation()}>
-        {blob ?
-          <img src={blob} alt="imagem"/> :
-          <Loading />
-        }
-      </StyledModal>
+      {toastDescription &&
+        <Toast 
+          title={'Success'}
+          status='success'
+          description={toastDescription} 
+          closeFunction={() => setToastDescription(undefined)}
+        />
+      }
+      {data &&
+        <StyledModal onClick={(e) => e.stopPropagation()}>
+          <Header>
+            <Star title='Add to favorites' onClick={handleAddFavorite}/>
+          </Header>
+          {blob ?
+            <img src={blob} alt="imagem"/> :
+            <Loading />
+          }
+        </StyledModal>
+      }
     </StyledModalContainer>
   )
 }
