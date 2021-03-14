@@ -63,7 +63,9 @@ const Home = () => {
 					Load more
 				</RoundedButton>
 			</div>
-			<Modal data={detailed} closeFunction={() => setDetailed(undefined)} />		
+			{detailed &&
+				<Modal data={detailed} closeFunction={() => setDetailed(undefined)} />		
+			}
 		</div>
 	)
 }

@@ -35,7 +35,7 @@ const StyledToast = styled.div`
   }
 `
 
-function Toast({ title, description, status, timeout=5000, closeFunction }) {
+function Toast({ options, timeout=5000, closeFunction }) {
   
   useEffect(() => {
     setTimeout(() => {
@@ -49,10 +49,10 @@ function Toast({ title, description, status, timeout=5000, closeFunction }) {
         e.stopPropagation()
         closeFunction()
       }}
-      status={status}
+      status={options.status}
     >
-      <h3>{title}</h3>
-      {description}
+      <h3>{options.title}</h3>
+      {options.description}
     </StyledToast>
   )
 }

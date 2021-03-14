@@ -132,12 +132,21 @@ const Star = styled(FaStar)`
   :active {
     transform: scale(0.8)
   }
+
+  ${props => props.isFavorite && css`
+    color: gold;
+    :hover {
+      color: #FDFDFF;
+    }
+  `}
 `
 
 function Modal({ data, closeFunction }) {
 
   const [ blob, setBlob ] = useState(undefined)
-  const [ toastDescription, setToastDescription ] = useState(undefined)
+  const [ showToast, setShowToast ] = useState(false)
+  const [ isFavorite, setIsFavorite ] = useState(false)
+  const [ toastOptions, setToastOptions ] = useState({})
 
   const loadImage = useCallback(async () => {
     if (!data) return
@@ -146,36 +155,54 @@ function Modal({ data, closeFunction }) {
 
   useEffect(() => {
     loadImage()
+    var favorites =  JSON.parse(localStorage.getItem("favorites") || "[]")
+    setIsFavorite(!!favorites.find(p => p.name === data.name))
   }, [loadImage])
 
   const handleClose = useCallback(() => {
     setBlob(undefined)
-    setToastDescription(undefined)
+    setShowToast(false)
     closeFunction()
   }, [closeFunction])
 
   const handleAddFavorite = useCallback(() => {
     var favorites =  JSON.parse(localStorage.getItem("favorites") || "[]")
-    favorites.push(data)
-    localStorage.setItem('favorites', JSON.stringify(favorites))
+    if (isFavorite){
+      favorites = favorites.filter(p => p.name !== data.name)
+      
+      setToastOptions({
+        title: 'Removed',
+        description: `${data.name} removed from favorites`,
+        status: 'error',
+      })
+      setIsFavorite(false)
+    } else {
+      favorites.push(data)
+      
+      setToastOptions({
+        title: 'Added',
+        description: `${data.name} added to favorites`,
+        status: 'success',
+      })
+      setIsFavorite(true)
+    }
 
-    setToastDescription(`${data.name} added to favorites`)
-  }, [data])
+    localStorage.setItem('favorites', JSON.stringify(favorites))
+    setShowToast(true)
+  }, [data, isFavorite, localStorage])
 
   return (
     <StyledModalContainer open={!!data} onClick={handleClose}>
-      {toastDescription &&
+      {showToast &&
         <Toast 
-          title={'Success'}
-          status='success'
-          description={toastDescription} 
-          closeFunction={() => setToastDescription(undefined)}
+          options={toastOptions}
+          closeFunction={() => setShowToast(false)}
         />
       }
       {data &&
         <StyledModal onClick={(e) => e.stopPropagation()}>
           <Header>
-            <Star title='Add to favorites' onClick={handleAddFavorite}/>
+            <Star title='Add to favorites' onClick={handleAddFavorite} isFavorite={isFavorite}/>
           </Header>
           {blob ?
             <img src={blob} alt="imagem"/> :
