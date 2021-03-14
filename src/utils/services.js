@@ -15,7 +15,12 @@ export default class Service {
 
   static async list() {
     const res = await this.get('https://pokeapi.co/api/v2/pokemon/')
-    // console.log(res.results)
     return res.results
   }
+  
+  static async getPokemon(name) {
+    const res = await this.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
+    return res
+  }
+
 }
