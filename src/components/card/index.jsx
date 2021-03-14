@@ -27,10 +27,10 @@ const StyledCard = styled.div`
 	}
 `
 
-function Card({ pokemon, ...rest }) {
+function Card({ children, ...rest }) {
   return (
-    <StyledCard image={pokemon.image} {...rest} >
-      {pokemon.name}
+    <StyledCard {...rest} >
+      {children}
     </StyledCard>	
   )
 }

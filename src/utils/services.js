@@ -13,9 +13,9 @@ export default class Service {
       .catch(console.error)
   }
 
-  static async list() {
-    const res = await this.get('https://pokeapi.co/api/v2/pokemon/')
-    return res.results
+  static async list(offset) {
+    const res = await this.get(`https://pokeapi.co/api/v2/pokemon/?limit=20&offset=${offset}`)
+    return res
   }
   
   static async getPokemon(name) {

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'preact/hooks';
 import styled from 'styled-components';
 import Card from '../../components/card';
 import Modal from '../../components/modal';
+import RoundedButton from '../../components/roundedButton';
 import Service from '../../utils/services';
 import style from './style.css';
 
@@ -30,24 +31,22 @@ const Home = () => {
 
 	const [pokemons, setPokemons] = useState([])
 	const [detailed, setDetailed] = useState(undefined)
+	const [limit, setLimit] = useState(20)
+	const [offset, setOffset] = useState(0)
+
+	const fetchData = useCallback(async () => {
+		const resp = await Service.list(offset)
+		setPokemons(p => [...p, ...resp.results])
+	}, [offset])
 
 	useEffect(() => {
-		const fetchData = async () => {
-			const allPokemons = await Service.list()
-
-			for (const p of allPokemons) {
-				const pokemon = await Service.getPokemon(p.name)
-				p.pokemon = pokemon
-				p.pokemon.image = `https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`
-			}
-
-			setPokemons(allPokemons)
-		}
 		fetchData()
-	}, [])
+	}, [fetchData])
 
-	const handleClick = useCallback((pokemon) => {
-		setDetailed(pokemon)
+	const handleClick = useCallback(async (pokemon) => {
+		const detailedPokemon = await Service.getPokemon(pokemon.name)
+		detailedPokemon.image = `https://pokeres.bastionbot.org/images/pokemon/${detailedPokemon.id}.png`
+		setDetailed(detailedPokemon)
 	}, [])
 
 	return (
@@ -55,11 +54,16 @@ const Home = () => {
 			<Title>All Pokémons List</Title>
 			<Grid>
 				{(pokemons.length > 0) && pokemons.map(p => 
-					<Card pokemon={p.pokemon} onClick={() => handleClick(p.pokemon)} >
+					<Card onClick={() => handleClick(p)} >
 						{p.name}
 					</Card>	
 				)}
 			</Grid>
+			<div class={style.flex}>
+				<RoundedButton onClick={() => setOffset(o => o + 20)}>
+					Load more
+				</RoundedButton>
+			</div>
 			<Modal data={detailed} closeFunction={() => setDetailed(undefined)} />		
 		</div>
 	)
