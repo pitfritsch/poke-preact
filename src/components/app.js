@@ -11,7 +11,7 @@ const App = () => (
 		<Header />
 		<Router>
 			<Home path="/" />
-			<Favorites path="/favorites" />
+			<Favorites path="/favorites/" />
 			{/* <Profile path="/profile/:user" /> */}
 		</Router>
 	</div>

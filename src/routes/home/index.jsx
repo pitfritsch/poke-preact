@@ -31,7 +31,6 @@ const Home = () => {
 
 	const [pokemons, setPokemons] = useState([])
 	const [detailed, setDetailed] = useState(undefined)
-	const [limit, setLimit] = useState(20)
 	const [offset, setOffset] = useState(0)
 
 	const fetchData = useCallback(async () => {
