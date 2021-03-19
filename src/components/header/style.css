@@ -10,7 +10,7 @@
 	z-index: 50;
 }
 
-.header h1 {
+.title{
 	float: left;
 	margin: 0;
 	padding: 0 15px;
@@ -19,6 +19,7 @@
 	font-weight: 400;
 	color: #ffcb05;
 	font-family: 'Anton', sans-serif;
+	text-decoration: none;
 }
 
 .header nav {

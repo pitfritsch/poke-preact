@@ -1,6 +1,6 @@
 {
-  "name": "poke-preact",
-  "short_name": "poke-preact",
+  "name": "Pokémon API",
+  "short_name": "Pokémon API",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",

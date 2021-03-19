@@ -8,7 +8,7 @@ const StyledButton = styled.div`
 	background-color: #fafafa;
 	color: #3e3e3e;
   border-radius: 5px;
-	font-family: 'Cantarell', sans-serif;
+	font-family: 'Oswald', sans-serif;
   font-size: 14px;
   border: none;
   cursor: pointer;

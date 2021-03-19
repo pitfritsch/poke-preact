@@ -7,7 +7,7 @@ const StyledCard = styled.div`
 	min-height: 100px;
 	background-color: #fafafa;
 	border-radius: 5px;
-	font-family: 'Cantarell', sans-serif;
+	font-family: 'Oswald', sans-serif;
 	color: #393D3F;
 	display: flex;
 	justify-content: center;

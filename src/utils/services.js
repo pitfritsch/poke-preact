@@ -24,7 +24,18 @@ export default class Service {
   }
 
   static async getImageBlob(url) {
-    return fetch(url)
+    // try {
+    //   const resp = await fetch(url)
+    //   const teste = resp
+
+    //   return teste.blob().then(myBlob => {
+    //     var obj = URL.createObjectURL(myBlob)
+    //     return obj
+    //   }).then(blob => blob)
+    // } catch (e) {
+    //   console.log(e)
+    // }
+    return fetch(`${url}`)
     .then(resp => resp.blob())
     .then(myBlob => {
       var obj = URL.createObjectURL(myBlob)
