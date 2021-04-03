@@ -4,6 +4,7 @@ import styled, { css, keyframes } from 'styled-components'
 import Service from '../../utils/services'
 import { FaStar } from 'react-icons/fa';
 import Toast from '../toast';
+import { Loading } from '../loading';
 
 const StyledModalContainer = styled.div`
   display: none;
@@ -22,15 +23,15 @@ const StyledModalContainer = styled.div`
 `
 
 const color = keyframes`
- 0% { background: #54b7ff }
- 12.5% { background: #5d54ff }
- 25% { background: #da54ff }
- 37.5% { background: #ff54c3 }
- 50% { background: #ff5454 }
- 62.5% { background: #ff54c3 }
- 75% { background: #da54ff }
- 87.5% { background: #5d54ff }
- 100% { background: #54b7ff }
+  0% { background: #54b7ff }
+  12.5% { background: #5d54ff }
+  25% { background: #da54ff }
+  37.5% { background: #ff54c3 }
+  50% { background: #ff5454 }
+  62.5% { background: #ff54c3 }
+  75% { background: #da54ff }
+  87.5% { background: #5d54ff }
+  100% { background: #54b7ff }
 `
 const fade = keyframes`
   0% { 
@@ -80,24 +81,6 @@ const StyledModal = styled.div`
       max-width: 90vw;
     }
   }
-`
-
-const rotate = keyframes`
-  0% { 
-    transform: rotate(0deg);
-  }
-  100% { 
-    transform: rotate(360deg);
-  }
-`
-
-const Loading = styled.div`
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
-  border: 5px solid transparent;
-  border-top: 5px solid #FDFDFF;
-  animation: ${rotate} 1s infinite;
 `
 
 const Header = styled.header`
