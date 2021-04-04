@@ -185,7 +185,9 @@ function Modal({ data, closeFunction }) {
       {data &&
         <StyledModal onClick={(e) => e.stopPropagation()}>
           <Header>
-            <Star title={isFavorite ? 'Remove from favorites' : 'Add to favorites'} onClick={handleAddFavorite} isFavorite={isFavorite}/>
+            {blob &&
+              <Star title={isFavorite ? 'Remove from favorites' : 'Add to favorites'} onClick={handleAddFavorite} isFavorite={isFavorite}/>
+            }
           </Header>
           {blob ?
             <img src={blob} alt="imagem"/> :

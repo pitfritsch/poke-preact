@@ -28,11 +28,27 @@ const fade = keyframes`
 `
 const StyledModal = styled.div`
   position: relative;
-  background: #54b7ff;
+  background: #353535;
   border-radius: 5px;
   animation-name: ${fade};
   animation-duration: .2s;
   animation-iteration-count: initial;
+  max-height: 90vh;
+  overflow: auto;
+  
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #35353500; 
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
 
   @media (max-width: 1200px) {
     width: 85vw;

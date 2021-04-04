@@ -75,10 +75,6 @@ const Item = ({ pokemon, setDetails }) => {
   useEffect(() => {
     loadImage()
   }, [loadImage])
-  
-  useEffect(() => {
-    console.log(blob)
-  }, [blob])
 
   return (
     <ListItem onClick={() => setDetails(pokemon)}>
