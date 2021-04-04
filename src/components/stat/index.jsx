@@ -5,6 +5,7 @@ const Total = styled.div`
   height: 20px;
   border-radius: 5px;
   background-color: #f26419;
+  overflow: hidden;
 `
 
 const fade = (size) => keyframes`
@@ -17,18 +18,18 @@ const fade = (size) => keyframes`
 `
 const Value = styled.div`
   height: 100%;
-  width: ${p => p.value}%;
-  max-width: 100%;
+  width: 0;
   background-color: #86bbd8;
   transition: .2s;
   border-radius: 5px;
   text-align: center;
   color: #353535;
 
-  
+  animation-delay: .2s;
   animation-name: ${p => fade(p.value)};
-  animation-duration: 1.5s;
+  animation-duration: 1s;
   animation-iteration-count: initial;
+  animation-fill-mode: forwards;
 `
 
 const StatName = styled.h4`

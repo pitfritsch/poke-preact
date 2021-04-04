@@ -17,6 +17,7 @@ const ModalContainer = styled.div`
 	flex-direction: column;
 	align-items: center;
 	padding: 50px;
+	padding-bottom: 0;
 `
 
 const ModalTitle = styled.h1`
@@ -34,6 +35,15 @@ const PokemonImage = styled.div`
 
 const Stats = styled.div`
 	padding: 50px;
+
+	@media (max-width: 1000px) {
+		padding: 40px;
+	}
+
+	@media (max-width: 400px) {
+		padding: 20px;
+	}
+	
 	padding-top: 0;
 `
 
@@ -60,7 +70,7 @@ const Favorites = () => {
 		<div class={style.favorites}>
 			<Container>
 				<h1>Favorites</h1>
-				{favorites && favorites.map(f => 
+				{favorites && [...favorites].reverse().map(f => 
 					<Item pokemon={f} setDetails={setDetails} />
 				)}
 			</Container>

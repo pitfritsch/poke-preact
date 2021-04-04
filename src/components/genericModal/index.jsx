@@ -35,6 +35,7 @@ const StyledModal = styled.div`
   animation-iteration-count: initial;
   max-height: 90vh;
   overflow: auto;
+  width: 50vw;
   
   ::-webkit-scrollbar {
     width: 5px;
