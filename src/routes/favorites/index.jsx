@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'preact/hooks';
 import styled from 'styled-components';
+import Ability from '../../components/ability';
 import GenericModal from '../../components/genericModal';
 import { Loading } from '../../components/loading';
 import Stat from '../../components/stat';
@@ -33,7 +34,7 @@ const PokemonImage = styled.div`
 	}
 `
 
-const Stats = styled.div`
+const Section = styled.section`
 	padding: 50px;
 
 	@media (max-width: 1000px) {
@@ -45,6 +46,11 @@ const Stats = styled.div`
 	}
 	
 	padding-top: 0;
+`
+
+const Title = styled.h1`
+	font-weight: 100;
+	text-align: center;
 `
 
 const Favorites = () => {
@@ -85,11 +91,18 @@ const Favorites = () => {
 						</PokemonImage>
 						<ModalTitle>{details.name}</ModalTitle>
 					</ModalContainer>
-					<Stats>
+					<Section>
+						<Title>Stats</Title>		
 						{details.stats.map(stat => 
 							<Stat stat={stat}/>
 						)}
-					</Stats>
+					</Section>
+					<Section>
+						<Title>Abilities</Title>		
+						{details.abilities.map(ability => 
+							<Ability ability={ability} />
+						)}
+					</Section>
 				</GenericModal>
 			}
 		</div>
